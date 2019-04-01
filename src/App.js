@@ -6,45 +6,50 @@ import Character from './components/Character';
 const App = props => {
 
   // return array always returns two elements, current state and a function that lets us override current state
-  const [state, setState] = useState({
-    selectedCharacter: 1,
-    side: 'light',
-    destroyed: false
-  })
+  // const [state, setState] = useState({
+  //   selectedCharacter: 1,
+  //   destroyed: false
+  // })
+
+  const [selectedCharacter, setSelectedCharacter] = useState('1')
+
+  const [destroyed, setDestroyed] = useState(false)
+
+  const [chosenSide, setChosenSide] = useState('light')
 
   // Need to turn these into consts that hold these functions
   const sideHandler = side => {
-    setState({ ...state, side: side }); // don't need 'this', not in a class anymore; need to merge manually.. use spread operator to get all properties of existing state
+    setChosenSide(side); // only need the side string here now
   };
 
   const charSelectHandler = event => {
-    const charId = event.target.value;
-    setState({ ...state, selectedCharacter: charId });
+    const charId = event.target.value; // this will be a string, so while we set the initial state to a number and it would be okay, we can go back and set the initial state to a string
+    setSelectedCharacter(charId); // only need the character id here now
   };
 
   const destructionHandler = () => {
-    setState({ ...state, destroyed: true });
+    setDestroyed(true); // only need the boolean here
   };
 
     let content = (
       <React.Fragment>
         <CharPicker
-          side={state.side}
-          selectedChar={state.selectedCharacter}
+          side={chosenSide}
+          selectedChar={selectedCharacter}
           onCharSelect={charSelectHandler}
         />
-        <Character selectedChar={state.selectedCharacter} />
+        <Character selectedChar={selectedCharacter} />
         <button onClick={sideHandler.bind(this, 'light')}>
           Light Side
         </button>
         <button onClick={sideHandler.bind(this, 'dark')}>Dark Side</button>
-        {state.side === 'dark' && (
+        {chosenSide === 'dark' && (
           <button onClick={destructionHandler}>DESTROY!</button>
         )}
       </React.Fragment>
     );
 
-    if (state.destroyed) {
+    if (destroyed) {
       content = <h1>Total destruction!</h1>;
     }
     return content;
