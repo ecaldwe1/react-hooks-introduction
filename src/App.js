@@ -11,7 +11,7 @@ const App = props => {
   //   destroyed: false
   // })
 
-  const [selectedCharacter, setSelectedCharacter] = useState('1')
+  const [selectedCharacter, setSelectedCharacter] = useState(1)
 
   const [destroyed, setDestroyed] = useState(false)
 
@@ -23,7 +23,7 @@ const App = props => {
   };
 
   const charSelectHandler = event => {
-    const charId = event.target.value; // this will be a string, so while we set the initial state to a number and it would be okay, we can go back and set the initial state to a string
+    const charId = event.target.value;
     setSelectedCharacter(charId); // only need the character id here now
   };
 
