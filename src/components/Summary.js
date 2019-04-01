@@ -2,6 +2,7 @@ import React from 'react';
 
 import './Summary.css';
 
+// Pure presentational component. Does not manage any state, only outputs information. --> Can be a functional component
 const Summary = props => {
   return (
     <div className="summary">
