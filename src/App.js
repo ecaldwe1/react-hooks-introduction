@@ -14,16 +14,16 @@ const App = props => {
 
   // Need to turn these into consts that hold these functions
   const sideHandler = side => {
-    setState({ side: side }); // don't need this, not in a class anymore
+    setState({ ...state, side: side }); // don't need 'this', not in a class anymore; need to merge manually.. use spread operator to get all properties of existing state
   };
 
   const charSelectHandler = event => {
     const charId = event.target.value;
-    setState({ selectedCharacter: charId });
+    setState({ ...state, selectedCharacter: charId });
   };
 
   const destructionHandler = () => {
-    setState({ destroyed: true });
+    setState({ ...state, destroyed: true });
   };
 
     let content = (
